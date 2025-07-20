@@ -7,7 +7,7 @@ setup(
     name="livestream-splitter",
     version="0.1.0",
     author="Bakchich SAS",
-    author_email="contact@bakchich.com",
+    author_email="infos@bakchich.app",
     description="Split long livestream recordings into YouTube-friendly segments with CLI and Web UI",
     long_description=long_description,
     long_description_content_type="text/markdown",

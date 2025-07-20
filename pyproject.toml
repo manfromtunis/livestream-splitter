@@ -6,10 +6,10 @@ build-backend = "setuptools.build_meta"
 name = "livestream-splitter"
 version = "0.1.0"
 authors = [
-    {name = "Bakchich SAS", email = "contact@bakchich.com"},
+    {name = "Bakchich SAS", email = "infos@bakchich.app"},
 ]
 maintainers = [
-    {name = "Bakchich SAS", email = "contact@bakchich.com"},
+    {name = "Bakchich SAS", email = "infos@bakchich.app"},
 ]
 description = "Split long livestream recordings into YouTube-friendly segments with CLI and Web UI"
 readme = "README.md"
