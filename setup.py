@@ -6,8 +6,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="livestream-splitter",
     version="0.1.0",
-    author="Livestream Splitter Contributors",
-    author_email="livestream-splitter@example.com",
+    author="Bakchich SAS",
+    author_email="contact@bakchich.com",
     description="Split long livestream recordings into YouTube-friendly segments with CLI and Web UI",
     long_description=long_description,
     long_description_content_type="text/markdown",
