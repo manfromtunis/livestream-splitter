@@ -1,0 +1,24 @@
+# Example configuration for batch processing multiple streams
+# This configuration is optimized for creating YouTube-ready content
+
+input_path: "long_livestream.mp4"
+
+output:
+  directory: "./youtube_segments"
+  format: "mp4"
+  naming_pattern: "Stream_{date}_Episode{index:02d}"
+  max_segment_length: 1200  # 20 minutes - optimal for YouTube
+
+intro_outro:
+  intro_path: "assets/channel_intro.mp4"
+  outro_path: "assets/subscribe_outro.mp4"
+
+processing:
+  quality: "high"
+  codec: "h264"
+  preset: "medium"    # Good balance of speed and quality
+  crf: 20            # High quality setting
+  threads: 6         # Adjust based on your CPU
+
+# Usage:
+# stream-splitter -c examples/batch_config.yaml your_livestream.mp4

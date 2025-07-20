@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# FFmpeg and Media Files
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.flv
+*.webm
+*.ts
+!tests/fixtures/*.mp4
+segments/
+output/
+
+# Configuration
+config/local_config.yaml
+config/local_config.json
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Web UI
+node_modules/
+web/frontend/dist/
+web/frontend/.cache/
+web/backend/__pycache__/
+*.pid
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
