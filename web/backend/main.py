@@ -15,9 +15,6 @@ from pydantic import BaseModel
 import uvicorn
 
 # Import our splitter components
-import sys
-sys.path.append(str(Path(__file__).parent.parent.parent / "src"))
-
 from stream_splitter.config import Config, OutputConfig, ProcessingConfig
 from stream_splitter.splitter import Splitter
 

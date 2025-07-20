@@ -1,0 +1,39 @@
+# Include documentation
+include README.md
+include LICENSE
+include CLAUDE.md
+include SESSION_LOG.md
+
+# Include web frontend files
+recursive-include web/frontend *.html *.css *.js
+recursive-include web/backend *.py
+
+# Include documentation
+recursive-include docs *.md
+
+# Include test files for development
+recursive-include tests *.py
+
+# Include startup scripts
+include start_web_ui.sh
+
+# Include configuration examples
+recursive-include config *.yaml *.yml
+
+# Include examples
+recursive-include examples *.py *.md
+
+# Exclude compiled files and caches
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
+global-exclude __pycache__
+global-exclude .git*
+global-exclude .DS_Store
+global-exclude *.tmp
+global-exclude *.log
+
+# Exclude output directories
+global-exclude uploads/*
+global-exclude outputs/*
+global-exclude test_output/*

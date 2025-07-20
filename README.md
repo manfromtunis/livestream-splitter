@@ -17,6 +17,33 @@ A powerful tool to split long livestream recordings into digestible segments wit
 
 ### Installation
 
+#### Option 1: Install from PyPI (Recommended)
+
+**Prerequisites**: Make sure [FFmpeg](https://ffmpeg.org/download.html) is installed on your system:
+```bash
+# Ubuntu/Debian
+sudo apt install ffmpeg
+
+# macOS
+brew install ffmpeg
+
+# Windows: Download from https://ffmpeg.org/download.html
+```
+
+**Install the package**:
+```bash
+# Install core functionality
+pip install livestream-splitter
+
+# Or install with web UI support
+pip install livestream-splitter[web]
+
+# Or install with all optional features
+pip install livestream-splitter[all]
+```
+
+#### Option 2: Install from Source
+
 1. **Install system dependencies**:
    ```bash
    # Ubuntu/Debian
@@ -48,7 +75,10 @@ A powerful tool to split long livestream recordings into digestible segments wit
    # Check FFmpeg
    ffmpeg -version
    
-   # Test CLI
+   # Test CLI (if installed from PyPI)
+   stream-splitter --help
+   
+   # Test CLI (if installed from source)
    python -m src.stream_splitter.cli --help
    ```
 
