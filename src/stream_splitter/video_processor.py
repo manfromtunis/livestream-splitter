@@ -17,11 +17,14 @@ class VideoProcessor:
     
     def _find_ffmpeg(self) -> Optional[str]:
         """Find FFmpeg executable"""
-        try:
-            # Test if ffmpeg is available
-            ffmpeg.probe("", cmd='ffmpeg')
+        import shutil
+        
+        # Check if ffmpeg is in PATH
+        ffmpeg_path = shutil.which('ffmpeg')
+        if ffmpeg_path:
+            logger.info(f"Found FFmpeg at: {ffmpeg_path}")
             return 'ffmpeg'
-        except Exception:
+        else:
             logger.warning("FFmpeg not found in PATH")
             return None
     
@@ -29,13 +32,35 @@ class VideoProcessor:
         """Extract video metadata using ffprobe"""
         try:
             probe = ffmpeg.probe(str(input_path))
+            
+            # Find the video stream (not audio)
+            video_stream = None
+            for stream in probe['streams']:
+                if stream['codec_type'] == 'video':
+                    video_stream = stream
+                    break
+            
+            if not video_stream:
+                raise ValueError("No video stream found in file")
+            
+            # Get duration from format if not in video stream
+            duration = float(video_stream.get('duration', probe['format']['duration']))
+            
+            # Parse frame rate safely
+            fps_str = video_stream.get('r_frame_rate', '30/1')
+            if '/' in fps_str:
+                num, den = fps_str.split('/')
+                fps = float(num) / float(den) if float(den) != 0 else 30.0
+            else:
+                fps = float(fps_str)
+            
             video_info = {
-                'duration': float(probe['streams'][0]['duration']),
-                'width': probe['streams'][0]['width'],
-                'height': probe['streams'][0]['height'],
-                'codec': probe['streams'][0]['codec_name'],
-                'fps': eval(probe['streams'][0]['r_frame_rate']),
-                'bitrate': int(probe['streams'][0].get('bit_rate', 0)),
+                'duration': duration,
+                'width': video_stream['width'],
+                'height': video_stream['height'],
+                'codec': video_stream['codec_name'],
+                'fps': fps,
+                'bitrate': int(video_stream.get('bit_rate', 0)),
                 'format': probe['format']['format_name']
             }
             return video_info
@@ -57,7 +82,9 @@ class VideoProcessor:
         
         for i in range(num_segments):
             start_time = i * segment_duration
-            output_path = Path(output_pattern.format(index=i+1))
+            # Replace {index:02d} with the actual segment number
+            segment_filename = output_pattern.replace("{index:02d}", f"{i+1:02d}")
+            output_path = Path(segment_filename)
             
             # Build FFmpeg command
             stream = ffmpeg.input(str(input_path), ss=start_time, t=segment_duration)

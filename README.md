@@ -17,19 +17,39 @@ A powerful tool to split long livestream recordings into digestible segments wit
 
 ### Installation
 
-1. **Install FFmpeg** (required dependency):
-   - **Windows**: Download from [FFmpeg.org](https://ffmpeg.org/download.html)
-   - **macOS**: `brew install ffmpeg`
-   - **Ubuntu/Debian**: `sudo apt install ffmpeg`
-
-2. **Install the tool**:
+1. **Install system dependencies**:
    ```bash
-   pip install -e .
+   # Ubuntu/Debian
+   sudo apt install ffmpeg python3.12-venv
+   
+   # macOS
+   brew install ffmpeg
+   
+   # Windows
+   # Download FFmpeg from https://ffmpeg.org/download.html
+   ```
+
+2. **Set up the project**:
+   ```bash
+   # Clone the repository
+   git clone <repository-url>
+   cd livestream-splitter
+   
+   # Create virtual environment
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   
+   # Install dependencies
+   pip install -r requirements.txt
    ```
 
 3. **Verify installation**:
    ```bash
-   stream-splitter check-ffmpeg
+   # Check FFmpeg
+   ffmpeg -version
+   
+   # Test CLI
+   python -m src.stream_splitter.cli --help
    ```
 
 ### Basic Usage
@@ -243,14 +263,42 @@ pip install -e .
 - **Disk Space**: 2-3x the input file size for processing
 - **RAM**: 4GB minimum, 8GB+ recommended for large files
 
+## 🌐 Web UI
+
+The project includes a modern web interface for easy video processing!
+
+### Starting the Web UI
+
+```bash
+# Quick start
+./start_web_ui.sh
+
+# Or manually
+source venv/bin/activate
+cd web/backend
+uvicorn main:app --reload
+```
+
+Then open your browser to: **http://localhost:8000**
+
+### Web UI Features
+
+- **Drag & Drop Upload**: Simply drag your video file onto the page
+- **Real-time Progress**: Watch your video being processed with live updates
+- **Download Manager**: Easy access to all processed segments
+- **Job History**: Track all your processing jobs
+- **Mobile Friendly**: Works on tablets and phones too
+
+See [WEB_UI_GUIDE.md](WEB_UI_GUIDE.md) for detailed usage instructions.
+
 ## 🚀 Future Features
 
-- **Web UI**: Browser-based configuration interface
 - **Batch Processing**: Process multiple files simultaneously
 - **Smart Splitting**: Scene detection and natural break points
 - **Direct Integration**: Download directly from Kick when API supports it
 - **Cloud Processing**: Optional cloud-based processing
 - **AI Highlights**: Automatic detection of engaging moments
+- **Scheduled Processing**: Set up automatic processing workflows
 
 ## 📄 License
 

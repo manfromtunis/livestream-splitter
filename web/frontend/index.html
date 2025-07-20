@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livestream Splitter - Web UI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Livestream Splitter</h1>
+            <p>Split your livestream recordings into digestible segments</p>
+        </header>
+
+        <main>
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <h2>📁 Upload Video</h2>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <div class="upload-icon">📹</div>
+                        <p>Drag & drop your video file here or click to browse</p>
+                        <p class="upload-hint">Supports MP4, MKV, AVI, MOV, FLV, WEBM, TS</p>
+                        <input type="file" id="fileInput" accept=".mp4,.mkv,.avi,.mov,.flv,.webm,.ts" hidden>
+                        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                            Choose File
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <h3>Selected File:</h3>
+                    <p id="fileName"></p>
+                    <p id="fileSize"></p>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section class="settings-section">
+                <h2>⚙️ Split Settings</h2>
+                <form id="settingsForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="maxLength">Segment Length</label>
+                            <select id="maxLength">
+                                <option value="600">10 minutes</option>
+                                <option value="900">15 minutes</option>
+                                <option value="1200" selected>20 minutes</option>
+                                <option value="1800">30 minutes</option>
+                                <option value="3600">1 hour</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="quality">Quality</label>
+                            <select id="quality">
+                                <option value="low">Low (smaller files)</option>
+                                <option value="medium">Medium (balanced)</option>
+                                <option value="high" selected>High (best quality)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="format">Output Format</label>
+                            <select id="format">
+                                <option value="mp4" selected>MP4</option>
+                                <option value="mkv">MKV</option>
+                                <option value="avi">AVI</option>
+                                <option value="mov">MOV</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="namingPattern">File Naming Pattern</label>
+                            <input type="text" id="namingPattern" value="{title}_part{index:02d}_{date}" 
+                                   placeholder="{title}_part{index:02d}_{date}">
+                            <small>Use {title}, {index:02d}, {date} as placeholders</small>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Process Section -->
+            <section class="process-section">
+                <button class="btn btn-success btn-large" id="processBtn" onclick="startProcessing()" disabled>
+                    🚀 Start Processing
+                </button>
+            </section>
+
+            <!-- Progress Section -->
+            <section class="progress-section" id="progressSection" style="display: none;">
+                <h2>📊 Processing Status</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                    <span class="progress-text" id="progressText">0%</span>
+                </div>
+                <p class="status-message" id="statusMessage">Initializing...</p>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>✅ Processing Complete</h2>
+                <div class="results-content">
+                    <p class="success-message">Your video has been successfully split into segments!</p>
+                    <div class="download-list" id="downloadList">
+                        <!-- Download links will be populated here -->
+                    </div>
+                    <button class="btn btn-secondary" onclick="resetForm()">Process Another Video</button>
+                </div>
+            </section>
+
+            <!-- Jobs History -->
+            <section class="jobs-section">
+                <h2>📋 Recent Jobs</h2>
+                <div class="jobs-list" id="jobsList">
+                    <p class="no-jobs">No recent jobs</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Made for Kick streamers, by content creators 🎮✨</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

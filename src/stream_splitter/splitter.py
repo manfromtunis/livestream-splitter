@@ -99,12 +99,15 @@ class Splitter:
         # Get current date
         date_str = datetime.now().strftime("%Y%m%d")
         
-        # Build pattern
-        pattern = self.config.output.naming_pattern.format(
+        # Build pattern with placeholder for index  
+        # Replace the formatting directive temporarily
+        temp_pattern = self.config.output.naming_pattern.replace("{index:02d}", "INDEXPLACEHOLDER")
+        pattern = temp_pattern.format(
             title=base_name,
-            date=date_str,
-            index="{index}"  # This will be filled during splitting
+            date=date_str
         )
+        # Put back the index placeholder for later use
+        pattern = pattern.replace("INDEXPLACEHOLDER", "{index:02d}")
         
         # Add extension
         pattern = str(self.config.output.directory / f"{pattern}.{self.config.output.format}")
